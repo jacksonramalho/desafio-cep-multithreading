@@ -8,6 +8,9 @@ import (
 	"time"
 )
 
+const apiViaCep = "viacep"
+const apiBrasilCep = "brasilcep"
+
 type CepInterface interface {
 }
 
@@ -104,9 +107,13 @@ func GetCep(url string, cep CepInterface) error {
 }
 
 func buildUrl(cep, nome string) string {
-	if nome == "viacep" {
+	if nome == apiViaCep {
 		return "http://viacep.com.br/ws/" + cep + "/json"
+
+	} else if nome == apiBrasilCep {
+		return "https://brasilapi.com.br/api/cep/v1/" + cep
 	}
 
-	return "https://brasilapi.com.br/api/cep/v1/" + cep
+	return ""
+
 }
